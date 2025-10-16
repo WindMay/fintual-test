@@ -1,7 +1,6 @@
 package portfolio
 
 import (
-	"encoding/json"
 	"fmt"
 )
 
@@ -41,7 +40,7 @@ func CreatePortfolio(id string, initialStocksCodes []InitialStock, stockFactory 
 	}, nil
 }
 
-func (p *Portfolio) Rebalance() string {
+func (p *Portfolio) Rebalance() {
 	var totalSharesValue int
 	var valuesStocks []int
 	for _, allocated := range p.AllocatedStocks {
@@ -58,32 +57,8 @@ func (p *Portfolio) Rebalance() string {
 			fmt.Println("We must sell these stocks to reach the goal")
 		} else if currentPortion < p.AllocatedStocks[i].Goal {
 			fmt.Println("We must buy these stocks to reach the goal")
+		} else {
+			fmt.Println("This stock its ok")
 		}
 	}
-	return ""
-
-}
-
-func (p *Portfolio) GetPortfolioId() string {
-	return p.Id
-}
-func (p *Portfolio) GetAllocatedStocks() []AllocatedExStock {
-	return p.AllocatedStocks
-}
-
-func (p *Portfolio) BalanceInvestments() {
-	for _, allocation := range p.AllocatedStocks {
-		allocation.Stock.CurrentPrice()
-	}
-}
-
-func PrettyPrint(data interface{}) {
-	var p []byte
-	//    var err := error
-	p, err := json.MarshalIndent(data, "", "\t")
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
-	fmt.Printf("%s \n", p)
 }
