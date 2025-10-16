@@ -9,3 +9,8 @@ represents the distribution of the Stocks the Portfolio is aiming (i.e. 40% META
 Provide a portfolio rebalance method to know which Stocks should be sold and which ones should be bought to have a
 balanced Portfolio based on the portfolio’s allocation.
 Add documentation/comments to understand your thinking process and solution
+
+## How to run
+
+Set your golang version to ``1.24.3`` then run with:
+``go run main.go``
