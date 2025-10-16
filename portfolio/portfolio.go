@@ -43,12 +43,15 @@ func CreatePortfolio(id string, initialStocksCodes []InitialStock, stockFactory 
 func (p *Portfolio) Rebalance() {
 	var totalSharesValue int
 	var valuesStocks []int
+	// Fetch a sum the prices to get the total portfolio value
 	for _, allocated := range p.AllocatedStocks {
 		currentPrice, _ := allocated.Stock.CurrentPrice()
 		value := currentPrice * allocated.Quantity
 		totalSharesValue += value
 		valuesStocks = append(valuesStocks, value)
 	}
+
+	// We check what to do for each allocation
 	for i, price := range valuesStocks {
 		currentPortion := (price * 100) / totalSharesValue
 		fmt.Println("Allocated Stock ", p.AllocatedStocks[i].Stock.GetStockCode())
